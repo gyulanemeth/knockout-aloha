@@ -1,0 +1,46 @@
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		
+		<title>Knockout-Aloha Test</title>
+		
+		<link rel="stylesheet" href="./lib//aloha/css/aloha.css" type="text/css">
+		
+		<script src="./lib/knockout-2.1.0.js"></script>
+		<script src="./lib/require.js"></script>
+		<script src="./lib/aloha/lib/aloha.js" data-aloha-plugins="common/format,common/highlighteditables,custom/knockout-binding"></script>
+		
+		<script src="./knockout-aloha.js"></script>
+		
+		<script>
+			Aloha.ready(function() {
+				ko.applyBindings({
+					alohaTest: ko.observable("alohaTest"),
+					alohaTest2: ko.observable("alohaTest2")
+				});
+				
+				$(".aloha-sidebar-bar").remove();
+			});
+		</script>
+		
+	</head>
+	<body>
+		<h1>Knockout-Aloha Test</h1>
+		
+		<h2>Aloha binding to alohaTest</h2>
+		<div data-bind="aloha: alohaTest"></div>
+		
+		<h2>Html binding to alohaTest</h2>
+		<div data-bind="html: alohaTest"></div>
+		
+		
+		<h2>Aloha binding to alohaTest</h2>
+		<div data-bind="aloha: alohaTest"></div>
+		
+		<h2>Aloha binding to alohaTest2</h2>
+		<div data-bind="aloha: alohaTest2"></div>
+		
+		<h2>Text binding to alohaTest2</h2>
+		<div data-bind="text: alohaTest2"></div>
+	</body>
+</html>
