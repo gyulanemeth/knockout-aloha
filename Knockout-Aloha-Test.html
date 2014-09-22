@@ -1,46 +1,54 @@
-<html>
+﻿<html>
 	<head>
 		<meta charset="UTF-8" />
-		
 		<title>Knockout-Aloha Test</title>
-		
-		<link rel="stylesheet" href="./lib//aloha/css/aloha.css" type="text/css">
-		
-		<script src="./lib/knockout-2.1.0.js"></script>
-		<script src="./lib/require.js"></script>
-		<script src="./lib/aloha/lib/aloha.js" data-aloha-plugins="common/format,common/highlighteditables,custom/knockout-binding"></script>
-		
-		<script src="./knockout-aloha.js"></script>
-		
-		<script>
-			Aloha.ready(function() {
-				ko.applyBindings({
-					alohaTest: ko.observable("alohaTest"),
-					alohaTest2: ko.observable("alohaTest2")
-				});
-				
-				$(".aloha-sidebar-bar").remove();
-			});
-		</script>
-		
+        <link href="lib/alohaeditor-1.1.0/aloha/css/aloha.css" rel="stylesheet" />
 	</head>
 	<body>
-		<h1>Knockout-Aloha Test</h1>
-		
-		<h2>Aloha binding to alohaTest</h2>
-		<div data-bind="aloha: alohaTest"></div>
-		
-		<h2>Html binding to alohaTest</h2>
-		<div data-bind="html: alohaTest"></div>
-		
-		
-		<h2>Aloha binding to alohaTest</h2>
-		<div data-bind="aloha: alohaTest"></div>
-		
-		<h2>Aloha binding to alohaTest2</h2>
-		<div data-bind="aloha: alohaTest2"></div>
-		
-		<h2>Text binding to alohaTest2</h2>
-		<div data-bind="text: alohaTest2"></div>
+        <div style="height: 300px;">
+            <h1>Current Vals</h1>
+            <h3 data-bind="html:rtVal1"></h3>
+            <h3 data-bind="html:rtVal2"></h3>
+        </div>
+        <textarea id="val1" data-bind="aloha:rtVal1" style="width: 100%"></textarea>
+        <textarea id="val2" data-bind="aloha:rtVal2" style="width: 100%"></textarea>
+
+        <button data-bind="click:changeVals">Change Vals</button>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
+
+
+        <script src="lib/alohaeditor-1.1.0/aloha/lib/require.js"></script>
+
+        <script src="lib/alohaeditor-1.1.0/aloha/lib/aloha.js" data-aloha-plugins="common/ui,common/format"></script>
+        <script src="knockout-aloha.js"></script>
+
+        <script type="text/javascript">
+            var vModel = function () {
+                var self = this;
+
+                self.rtVal1 = ko.observable("I'm Number 1");
+                self.rtVal2 = ko.observable("I'm Number 2");
+
+                self.rtVal1.subscribe(function () {
+                    console.log({ rtVal1: self.rtVal1() });
+                });
+
+                self.rtVal2.subscribe(function () {
+                    console.log({ rtVal2: self.rtVal2() });
+                });
+
+                self.changeVals = function () {
+                    self.rtVal1("newVal1");
+                    self.rtVal2("newVal2");
+                };
+
+                return self;
+            };
+            ko.applyBindings(new vModel());
+
+        </script>
 	</body>
 </html>
